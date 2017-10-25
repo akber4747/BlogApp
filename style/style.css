@@ -1,0 +1,10 @@
+body{
+    margin: 5% auto; 
+	max-width: 650px;
+	line-height: 1.6;
+	font-size: 18px;
+	padding: 0 15px;
+	font-family: "Avenir", Helvetica, sans-serif;
+	color: #444;
+	background: #f2f2f2;
+}
