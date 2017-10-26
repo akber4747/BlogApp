@@ -10,11 +10,13 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import promise from 'redux-promise';
 import TopNav from './components/top_navigation';
 import reducers from './reducers';
 import PostsIndex from './components/posts_index';
+import PostsNew from './components/posts_new';
+import PostsShow from './components/posts_show';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -25,10 +27,11 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
       <TopNav />
-
-        <Route path="/" component={PostsIndex} />
-        {/* <Route path="/posts/:id" component={PostsShow} />
-        <Route path="/posts/new" component={PostsNew} /> */}
+        <Switch >
+          <Route path="/posts/new" component={PostsNew} />
+          <Route path="posts/:id" component={PostsShow} />;
+          <Route path="/" component={PostsIndex} />
+        </Switch>
         </div>
     </BrowserRouter>
   </Provider>
