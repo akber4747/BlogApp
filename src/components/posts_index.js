@@ -9,6 +9,8 @@ import purple from 'material-ui/colors/purple';
 import green from 'material-ui/colors/green';
 import pink from 'material-ui/colors/pink';
 import createPalette from 'material-ui/styles/createPalette';
+import { Link } from 'react-router-dom';
+
 // const styles = (theme: Object) => ({
 //     root: {
 //       display: 'flex',
@@ -62,29 +64,26 @@ class PostsIndex extends Component {
     }
     renderPosts(){
         const { classes } = this.props;
-        
+        if(!this.props.posts.length){
+            return (
+
+                <ListItem  >
+                    <ListItemText style={styles} primary="no Posts yet" />
+                </ListItem>
+            )
+        }
+
         return _.map(this.props.posts, post => {
             return (
                 <div key={post.id}  >
+                    <Link to={`/posts/${post.id}`}>
 
-                    <ListItem button 
-                    /*
-                        classes={{
-                            root: classes.root,
-                            button: classes.button
+                        <ListItem button >
 
-                            // className, e.g. `OverridesClasses-root-X`
-                            // label: classes.label, // className, e.g. `OverridesClasses-label-X`
-                        }}
-                        */
-                    >
-                        <ListItemText style={styles} primary={post.title}  
-                  
+                                <ListItemText style={styles} primary={post.title} />
+                        </ListItem>
+                    </Link>
 
-              
-                        
-                        />
-                    </ListItem>
                 </div>
             )
         });

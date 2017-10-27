@@ -1,15 +1,26 @@
-import { FETCH_POSTS, CREATE_POST } from '../actions/index';
+import { FETCH_POSTS, FETCH_POST, CREATE_POST, DELETE_POST } from '../actions/index';
 import _ from 'lodash';
 
 export default function(state = {}, action){
     switch (action.type){
         case FETCH_POSTS:
-            console.log(action.payload.data); // this will be AN ARRAY OF POSTS [post1, post2, ...], but we awnat {4: post, 5: post}
             return _.mapKeys(action.payload.data, "id");
+        case FETCH_POST: 
+            const post = action.payload.data;
+
+            // old javascript version:
+            // const newState = { ...state};
+            // newState[post.id] = post;
+            // return newState;
+
+            // es6 syntax: 
+            return {...state, [action.payload.data.id]: action.payload.data}
 
         case CREATE_POST:
             console.log(action.payload.data);
             return action.payload.data;
+        case DELETE_POST: 
+            return _.omit(state, action.payload)
         default:
             return state;
     }
